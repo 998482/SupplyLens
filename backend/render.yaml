@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: supplylens
+    runtime: python
+    buildCommand: pip install fastapi uvicorn pydantic python-dotenv requests google-generativeai scikit-learn pandas numpy httpx
+    startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
