@@ -1,5 +1,10 @@
 from fastapi import APIRouter
 from schemas import CascadeMapResponse, CascadeNode, CascadeEdge
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'cascade'))
+from cascade_engine import CascadeEngine
+from demo_data import get_supply_graph
 
 router = APIRouter()
 
@@ -29,3 +34,11 @@ def get_cascade_map(route_id: str):
         CascadeEdge(**{"from": "node_9", "to": "node_10"}),
     ]
     return CascadeMapResponse(nodes=nodes, edges=edges, disrupted_node="node_1")
+
+
+@router.get("/api/cascade/disruption/{node_id}")
+def get_disruption(node_id: str):
+    graph = get_supply_graph()
+    engine = CascadeEngine(graph["nodes"], graph["edges"])
+    result = engine.get_cascade(node_id)
+    return {"disrupted_node": node_id, "cascade_tiers": result}
