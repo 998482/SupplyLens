@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Singleton
 class RetrofitClient @Inject constructor() {
 
-    private val baseUrl = BuildConfig.BASE_URL
+    private val baseUrl = "http://192.168.1.88:8000/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

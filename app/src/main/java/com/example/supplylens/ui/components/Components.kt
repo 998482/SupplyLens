@@ -119,7 +119,7 @@ fun AlertCard(
 
 @Composable
 fun ScenarioToggle(
-    title: String,
+    title: String? = "",
     isActive: Boolean,
     onClick: () -> Unit
 ) {
@@ -145,7 +145,7 @@ fun ScenarioToggle(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                title,
+                title ?: "",
                 color = TextPrimary,
                 fontSize = 13.sp,
                 modifier = Modifier.weight(1f)

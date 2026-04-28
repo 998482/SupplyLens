@@ -2,45 +2,35 @@ package com.supplylens.app.data.remote
 
 import com.supplylens.app.data.model.*
 import retrofit2.http.*
+import com.example.supplylens.data.remote.ApiEndpoints
 
 interface ApiService {
 
     // ── Real API Endpoints (Updated with actual contract) ──
 
-    @GET("api/kpis")
+    @GET(ApiEndpoints.KPI)
     suspend fun getKpis(): KpiData
 
-    @GET("api/alerts")
+    @GET(ApiEndpoints.ALERTS)
     suspend fun getAlerts(): List<AlertItem>
 
-    @GET("api/shipments")
+    @GET(ApiEndpoints.SHIPMENTS)
     suspend fun getShipments(): List<Shipment>
 
-    @GET("api/scenarios")
+    @GET(ApiEndpoints.SCENARIOS)
     suspend fun getScenarios(): List<Scenario>
 
-    @POST("api/simulate-disruption")
-    suspend fun simulateDisruption(
-        @Body request: SimulateDisruptionRequest
-    ): SimulateDisruptionResponse
+    @POST(ApiEndpoints.SIMULATE)
+    suspend fun simulateDisruption(@Body request: SimulateDisruptionRequest): SimulateDisruptionResponse
 
-    @GET("api/cascade-map/{routeId}")
-    suspend fun getCascadeMap(
-        @Path("routeId") routeId: String
-    ): CascadeMapResponse
+    @GET(ApiEndpoints.CASCADE_MAP)
+    suspend fun getCascadeMap(@Path("route_id") routeId: String): CascadeMapResponse
 
-    @POST("api/predict-disruption")
-    suspend fun predictDisruption(
-        @Body request: PredictDisruptionRequest
-    ): PredictDisruptionResponse
+    @POST(ApiEndpoints.PREDICT)
+    suspend fun predictDisruption(@Body request: PredictDisruptionRequest): PredictDisruptionResponse
 
-    @POST("api/explain")
-    suspend fun explainRisk(
-        @Body request: ExplainRiskRequest
-    ): ExplainRiskResponse
-
-    @GET("api/network")
-    suspend fun getNetwork(): NetworkData
+    @POST(ApiEndpoints.EXPLAIN)
+    suspend fun explainRisk(@Body request: ExplainRiskRequest): ExplainRiskResponse
 }
 
 // ── Request Models ──
